@@ -1,0 +1,50 @@
+[
+    {
+        "question": "how to register",
+        "matches": [
+            {
+                "code": "signup_help",
+                "percent": 73
+            },
+            {
+                "code": "signup_help",
+                "percent": 73
+            }
+        ]
+    },
+    {
+        "question": "how to register",
+        "matches": [
+            {
+                "code": "signup_help",
+                "percent": 73
+            }
+        ]
+    },
+    {
+        "question": "how make to login after signup?",
+        "matches": [
+            {
+                "code": "signup_help",
+                "percent": 50
+            },
+            {
+                "code": "signin_help",
+                "percent": 60
+            }
+        ]
+    },
+    {
+        "question": "how make to login after signup",
+        "matches": [
+            {
+                "code": "signup_help",
+                "percent": 50
+            },
+            {
+                "code": "signin_help",
+                "percent": 61
+            }
+        ]
+    }
+]

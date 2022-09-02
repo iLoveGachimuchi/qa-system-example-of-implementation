@@ -1,0 +1,96 @@
+<?include('header.html')?>
+
+<body>
+    <h1>
+        <?=$title?>
+    </h1>
+
+    <?include('navigation.html')?>
+
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>New Question</h2>
+        </div>
+
+        <?include('page-info-message.html')?>
+
+        <div class="row">
+            <div class="col-md-6 order-md-1">
+                <h4 class="mb-4">Add new alias</h4>
+                <form class="needs-validation" novalidate="" method="POST"
+                    action="/ui/qa/learning/question/add?answer_code=<?=$_GET['answer_code']?>">
+                    <div class="mb-4">
+                        <label for="answer_code">Question</label>
+                        <input type="text" class="form-control" id="answer_code" placeholder=""
+                            value="<?=$_GET['answer_code']?>" readonly>
+                        <div class="invalid-feedback">
+                            Valid qustion is required.
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="Alias">Alias</label>
+
+                        <?if (is_array($questionAlias)) {?>
+                            <?foreach($questionAlias as $v) {?>
+                                <?if (strlen($v) == 0) continue;?>
+                                <div class="entry input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">?</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="Alias" placeholder="Alias" name="alias[]"
+                                        required="" value="<?=$v?>">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger btn-remove" type="button">
+                                            <span class="glyphicon glyphicon-minus">-</span>
+                                        </button>
+                                    </span>
+                                </div>
+                            <?}?>
+                        <?}?>
+                        <div class="entry input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">?</span>
+                            </div>
+                            <input type="text" class="form-control" id="Alias" placeholder="Alias" name="alias[]"
+                                required="">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success btn-add" type="button">
+                                    <span class="glyphicon glyphicon-plus">+</span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg" type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            $(function () {
+                $(document).on('click', '.btn-add', function (e) {
+                    e.preventDefault();
+
+                    var dynaForm = $('.dynamic-wrap form:first'),
+                        currentEntry = $(this).parents('.entry:first'),
+                        newEntry = $(currentEntry.clone()).insertAfter(currentEntry);
+
+                    newEntry.find('input').val('');
+                    dynaForm.find('.entry:not(:last) .btn-add')
+                        .removeClass('btn-add').addClass('btn-remove')
+                        .removeClass('btn-success').addClass('btn-danger')
+                        .html('<span class="glyphicon glyphicon-minus">-</span>');
+                }).on('click', '.btn-remove', function (e) {
+                    $(this).parents('.entry:first').remove();
+
+                    e.preventDefault();
+                    return false;
+                });
+            });
+        </script>
+
+    </div>
+</body>
+
+</html>
