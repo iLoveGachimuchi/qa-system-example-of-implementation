@@ -46,15 +46,18 @@ abstract class QASystem
             }
             if ($extractResult['percent'] > 0.0) {
                 $addmatch = boolval(count($matchResults) == 0);
+                $codeMatchesTemp = array();
+
                 for ($i = 0; $i < count($matchResults); $i++) {
-                    if (in_array($extractResult['code'], $matchResults[$i])) {
+                    $codeMatchesTemp[] = $matchResults[$i]['code'];
+                    if ($extractResult['code'] == $matchResults[$i]['code']) {
                         if ($extractResult['percent'] > $matchResults[$i]['percent']) {
                             $matchResults[$i]['percent'] = $extractResult['percent'];
                         }
                     } else
                         $addmatch = true;
                 }
-                if ($addmatch)
+                if ($addmatch and !in_array($extractResult['code'], $codeMatchesTemp))
                     $matchResults[] = $extractResult;
             }
         }

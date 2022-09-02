@@ -39,7 +39,7 @@ class PublicMethods extends \System\Core\Methods
         $this->restMethodCheck($this->request->getRequestMethod(), array('get'));
 
         $qa = new QASimple();
-        $qa->setQuestion($this->request->getQuery('question'));
+        $qa->setQuestion(($this->request->getQuery('query')));
 
         return $this->responce->result($qa->answer(QA_TEXT));
     }
